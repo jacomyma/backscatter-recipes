@@ -333,9 +333,6 @@ function addMissingVisualizationData() {
     if (n.label == undefined) {
       n.label = ''
     }
-
-    // Swap y
-    n.y = -n.y
   })
 
   if (coordinateIssues > 0) {

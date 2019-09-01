@@ -9,17 +9,17 @@ angular.module('graphrecipes.recipes_list', [])
 	{
 		'name': 'Make a Map',
 		'desc': 'Simple rendering of nodes and edges (1 megapixel).',
-		'file': 'Make a map 1.0.0.js'
+		'file': 'Make a map 1.0.1.js'
 	},
 	{
 		'name': 'Make a Map (settings: clusters)',
 		'desc': 'Rendering of nodes and clusters (1 megapixels)',
-		'file': 'Make a map 1.0.0 - Clusters.js'
+		'file': 'Make a map 1.0.1 - Clusters.js'
 	},
 	{
 		'name': 'Make a Map (settings: high resolution)',
 		'desc': 'Produces a high quality, 64 megapixel rendering of nodes and edges.',
-		'file': 'Make a map 1.0.0 - HR.js'
+		'file': 'Make a map 1.0.1 - HR.js'
 	},
 	{
 		'name': 'Highlight Modality',
