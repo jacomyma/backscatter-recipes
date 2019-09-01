@@ -1118,7 +1118,7 @@ function drawNodeLabelsLayer(ctx, nodesBySize_) {
 
         // Then, draw the label only if wanted
         var labelCoordinates = {
-          x: nx + 0.6 * options.border_thickness + 1.05 * radius,
+          x: nx,
           y: ny + 0.25 * fontSize
         }
 
@@ -1160,6 +1160,7 @@ function drawNodeLabelsLayer(ctx, nodesBySize_) {
           // Draw
           ctx.fillStyle = options.border_color
           ctx.strokeStyle = options.border_color
+          ctx.textAlign = "center"
 
           ctx.fillText(
             label

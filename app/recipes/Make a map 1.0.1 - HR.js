@@ -90,7 +90,7 @@ settings.node_size = 0.8 // Factor to adjust the nodes drawing size
 // Layer: Node labels
 settings.label_font_min_size = 4 // in pt based on 1MP 72dpi
 settings.label_font_max_size = 18  // in pt based on 1MP 72dpi
-settings.label_border_thickness = 2.5
+settings.label_border_thickness = 0
 
 // Main clusters and color code:
 // Clusters are defined by the modalities of a given attribute.
@@ -1384,7 +1384,7 @@ function drawNodeLabelsLayer(ctx, nodesBySize_) {
 
         // Then, draw the label only if wanted
         var labelCoordinates = {
-          x: nx + 0.6 * options.border_thickness + 1.05 * radius,
+          x: nx,
           y: ny + 0.25 * fontSize
         }
 
@@ -1426,6 +1426,7 @@ function drawNodeLabelsLayer(ctx, nodesBySize_) {
           // Draw
           ctx.fillStyle = options.border_color
           ctx.strokeStyle = options.border_color
+          ctx.textAlign = "center"
 
           ctx.fillText(
             label

@@ -1443,7 +1443,7 @@ function drawNodeLabelsLayer(ctx, nodesBySize_) {
         var radius = Math.max(settings.node_size * n.size, 2)
 
         var labelCoordinates = {
-          x: nx + 0.6 * options.border_thickness + 1.05 * radius + options.offset,
+          x: nx,
           y: ny + 0.25 * options.font_size
         }
 
@@ -1485,6 +1485,7 @@ function drawNodeLabelsLayer(ctx, nodesBySize_) {
           // Draw
           ctx.fillStyle = options.border_color
           ctx.strokeStyle = options.border_color
+          ctx.textAlign = "center"
 
           ctx.fillText(
             label
