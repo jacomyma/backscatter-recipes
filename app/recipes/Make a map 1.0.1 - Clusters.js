@@ -1442,7 +1442,7 @@ function drawNodeLabelsLayer(ctx, nodesBySize_) {
             , labelCoordinates.y
             )
           }
-          
+
           ctx.lineWidth = 0
           ctx.fillStyle = color.toString()
           ctx.fillText(
@@ -1501,7 +1501,7 @@ function drawClusterLabelsLayer(ctx, modalities, centroidsByModality) {
       var y = centroid[1]
       
       if (options.draw_label) {
-        ctx.font = options.font_weight + " italic " + options.font_size+"px "+options.font_family
+        ctx.font = options.font_weight + " " + options.font_size+"px "+options.font_family
         ctx.lineCap="round"
         ctx.lineJoin="round"
         ctx.lineWidth = options.border_thickness
