@@ -1301,8 +1301,8 @@ function drawNodeLabelsLayer(ctx, nodesBySize_) {
   //  Medium/500: 17.5
   //  Semi-bold/600: 20
   //  Bold/700: 23.5
-  var weights =     [ /*100, */200, 300,  400,  500, 600,  700 ]
-  var thicknesses = [ /*3.5,   */6,   9, 12.5, 17.5,  20, 23.5 ]
+  var weights =     [ /*100, 200, 300,*/  400,  500, 600,  700 ]
+  var thicknesses = [ /*3.5,   6,   9,*/ 12.5, 17.5,  20, 23.5 ]
   var thicknessToWeight = d3.scaleLinear()
     .domain(thicknesses)
     .range(weights)
@@ -1430,16 +1430,19 @@ function drawNodeLabelsLayer(ctx, nodesBySize_) {
           ctx.strokeStyle = options.border_color
           ctx.textAlign = "center"
 
-          ctx.fillText(
-            label
-          , labelCoordinates.x
-          , labelCoordinates.y
-          )
-          ctx.strokeText(
-            label
-          , labelCoordinates.x
-          , labelCoordinates.y
-          )
+          if (options.border_thickness > 0) {
+            ctx.fillText(
+              label
+            , labelCoordinates.x
+            , labelCoordinates.y
+            )
+            ctx.strokeText(
+              label
+            , labelCoordinates.x
+            , labelCoordinates.y
+            )
+          }
+
           ctx.lineWidth = 0
           ctx.fillStyle = color.toString()
           ctx.fillText(
