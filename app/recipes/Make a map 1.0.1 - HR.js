@@ -1375,7 +1375,7 @@ function drawNodeLabelsLayer(ctx, nodesBySize_) {
         var radius = Math.max(settings.node_size * n.size, 2)
 
         // Precompute the label
-        var color = options.colored_labels ? tuneColorForLabel(ncol) : d3.color('#666')
+        var color = options.colored_labels ? tuneColorForLabel(ncol) : d3.color(options.default_color_label)
         var fontSize = options.sized_labels
           ? Math.floor(options.font_min_size + (n.size - label_nodeSizeExtent[0]) * (options.font_max_size - options.font_min_size) / (label_nodeSizeExtent[1] - label_nodeSizeExtent[0]))
           : Math.floor(0.6 * options.font_min_size + 0.4 * options.font_max_size)
