@@ -36,7 +36,7 @@ if (settings.show_nodes_eges_count) {
 // Title block
 function showTitleBlock() {
 	var options = {}
-	options.margin = 6
+	options.margin = 6 * settings.width/1000
 	options.font_size = 100 * settings.width/1000
 	options.width = settings.width
 	options.height = Math.ceil(2 * options.margin + 1.05 * options.font_size)
@@ -76,11 +76,11 @@ function showTitleBlock() {
 
 function showCountsBlock() {
 	var options = {}
-	options.margin = 6
-	options.font_size = 64 * settings.width/1000
+	options.margin = 6 * settings.width/1000
+	options.font_size = 56 * settings.width/1000
 	options.width = settings.width
-	options.height = Math.ceil(2 * options.margin + 1.05 * options.font_size)
-  options.font_weight_bold = 600
+	options.height = Math.ceil(2 * options.margin + 1.25 * options.font_size)
+  options.font_weight_bold = 500
   options.font_weight_regular = 300
   options.font_family = settings.font_family
 	options.background_color = settings.block_background_color
@@ -104,13 +104,55 @@ function showCountsBlock() {
   ctx.fill()
   ctx.closePath()
 
-  // Paint label
+  // Text
+  var w, txt
   ctx.lineWidth = 0
-  ctx.font = options.font_weight + " " + options.font_size+"px "+options.font_family
   ctx.fillStyle = options.text_color
+
+  ctx.font = options.font_weight_bold + " " + options.font_size+"px "+options.font_family
+  txt = "nodes: "
+  
   ctx.fillText(
-    settings.title
+    txt
   , options.margin
-  , options.height - options.margin
+  , options.height - options.margin - 0.2 * options.font_size
   )
+  w = ctx.measureText(txt).width
+
+  ctx.font = options.font_weight_regular + " " + options.font_size+"px "+options.font_family
+  txt = numberWithCommas(g.order)
+  
+  ctx.fillText(
+    txt
+  , options.margin + w
+  , options.height - options.margin - 0.2 * options.font_size
+  )
+  w = ctx.measureText(txt).width
+
+	ctx.font = options.font_weight_bold + " " + options.font_size+"px "+options.font_family
+  txt = "edges: "
+  
+  ctx.fillText(
+    txt
+  , options.width / 2
+  , options.height - options.margin - 0.2 * options.font_size
+  )
+  w = ctx.measureText(txt).width
+
+  ctx.font = options.font_weight_regular + " " + options.font_size+"px "+options.font_family
+  txt = numberWithCommas(g.size)
+  
+  ctx.fillText(
+    txt
+  , options.width / 2 + w
+  , options.height - options.margin - 0.2 * options.font_size
+  )
+  w = ctx.measureText(txt).width
+
+
+}
+
+// Helpers
+function numberWithCommas(x) {
+	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
