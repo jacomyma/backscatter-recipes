@@ -202,23 +202,21 @@ for (attr in eAttributes) {
 console.log('Edge attributes', eAttributes)
 
 // Write the compte-rendu
-var playground = document.querySelector('#playground')
+document.querySelector('#playground').innerHTML = '<md-content id="content" style="padding: 12px;"></md-content>'
+var content = document.querySelector('#content')
 
 var h1 = document.createElement("h1")
 h1.textContent = '' + d3.keys(nAttributes).length + ' NODE ATTRIBUTES'
-h1.style.margin = "0"
-playground.append(h1)
+content.append(h1)
 
 var pre, h5
 for (attr in nAttributes) {
   var h3 = document.createElement("h3")
   h3.textContent = attr
-  h3.style.margin = "40px 0 0 0"
-  playground.append(h3)
+  content.append(h3)
 
   pre = document.createElement("pre")
-  pre.style.margin = "0"
-  playground.append(pre)
+  content.append(pre)
 
   // Node attribute
   pre.textContent += 'Attribute ID: ' + attr
@@ -256,12 +254,10 @@ for (attr in nAttributes) {
   // Values summary
   h5 = document.createElement("h5")
   h5.textContent = 'Values summary'
-  h5.style.margin = "0"
-  playground.append(h5)
+  content.append(h5)
   
   pre = document.createElement("pre")
-  pre.style.margin = "0"
-  playground.append(pre)
+  content.append(pre)
   
   if (attData.valuesStats.differentValues == 1) {
     pre.textContent += 'All nodes have the same ' + attr + '. '
@@ -283,12 +279,10 @@ for (attr in nAttributes) {
   if (attData.valuesStats.differentValues <= 10) {
     h5 = document.createElement("h5")
     h5.textContent = 'Values'
-    h5.style.margin = "0"
-    playground.append(h5)
+    content.append(h5)
     
     pre = document.createElement("pre")
-    pre.style.margin = "0"
-    playground.append(pre)
+    content.append(pre)
 
     pre.textContent += d3.keys(attData.values)
         .sort(function(a, b){ return attData.values[b] - attData.values[a] })
@@ -299,12 +293,10 @@ for (attr in nAttributes) {
   } else if (attData.valuesStats.differentValues - attData.valuesStats.valuesUnitary >= 1 && attData.valuesStats.differentValues - attData.valuesStats.valuesUnitary <= 10) {
     h5 = document.createElement("h5")
     h5.textContent = 'Values taken by more than one node'
-    h5.style.margin = "0"
-    playground.append(h5)
+    content.append(h5)
     
     pre = document.createElement("pre")
-    pre.style.margin = "0"
-    playground.append(pre)
+    content.append(pre)
 
     pre.textContent += d3.keys(attData.values)
         .sort(function(a, b){ return attData.values[b] - attData.values[a] })
@@ -318,12 +310,10 @@ for (attr in nAttributes) {
   } else if (attData.valuesStats.differentValues - attData.valuesStats.valuesUnitary > 10) {
     h5 = document.createElement("h5")
     h5.textContent = 'Values taken by the most nodes (top 10)'
-    h5.style.margin = "0"
-    playground.append(h5)
+    content.append(h5)
     
     pre = document.createElement("pre")
-    pre.style.margin = "0"
-    playground.append(pre)
+    content.append(pre)
 
     pre.textContent += d3.keys(attData.values)
         .sort(function(a, b){ return attData.values[b] - attData.values[a] })
@@ -339,16 +329,14 @@ for (attr in nAttributes) {
   // Color settings bundle
   h5 = document.createElement("h5")
   h5.textContent = 'Color settings bundle (COPY-PASTABLE JSON)'
-  h5.style.margin = "0"
-  playground.append(h5)
+  content.append(h5)
   
   var ta = document.createElement("textarea")
   ta.cols = "30"
   ta.rows = "10"
   ta.style.minHeight = "150px"
   ta.style.fontFamily = "monospace"
-  ta.style.margin = "0"
-  playground.append(ta)
+  content.append(ta)
 
   ta.textContent += 'settings.node_clusters = '
   if (attData.valuesStats.differentValues < settings.maximum_modalities) {
@@ -413,19 +401,16 @@ for (attr in nAttributes) {
 
 h1 = document.createElement("h1")
 h1.textContent = '' + d3.keys(eAttributes).length + ' EDGE ATTRIBUTES'
-h1.style.margin = "100px 0 0 0"
-playground.append(h1)
+content.append(h1)
 
 var pre, h5
 for (attr in eAttributes) {
   var h3 = document.createElement("h3")
   h3.textContent = attr
-  h3.style.margin = "40px 0 0 0"
-  playground.append(h3)
+  content.append(h3)
 
   pre = document.createElement("pre")
-  pre.style.margin = "0"
-  playground.append(pre)
+  content.append(pre)
 
   // Edge attribute
   pre.textContent += 'Attribute ID: ' + attr
@@ -463,12 +448,10 @@ for (attr in eAttributes) {
   // Values summary
   h5 = document.createElement("h5")
   h5.textContent = 'Values summary'
-  h5.style.margin = "0"
-  playground.append(h5)
+  content.append(h5)
   
   pre = document.createElement("pre")
-  pre.style.margin = "0"
-  playground.append(pre)
+  content.append(pre)
   
   if (attData.valuesStats.differentValues == 1) {
     pre.textContent += 'All edges have the same ' + attr + '. '
@@ -490,12 +473,10 @@ for (attr in eAttributes) {
   if (attData.valuesStats.differentValues <= 10) {
     h5 = document.createElement("h5")
     h5.textContent = 'Values'
-    h5.style.margin = "0"
-    playground.append(h5)
+    content.append(h5)
     
     pre = document.createElement("pre")
-    pre.style.margin = "0"
-    playground.append(pre)
+    content.append(pre)
 
     pre.textContent += d3.keys(attData.values)
         .sort(function(a, b){ return attData.values[b] - attData.values[a] })
@@ -506,12 +487,10 @@ for (attr in eAttributes) {
   } else if (attData.valuesStats.differentValues - attData.valuesStats.valuesUnitary >= 1 && attData.valuesStats.differentValues - attData.valuesStats.valuesUnitary <= 10) {
     h5 = document.createElement("h5")
     h5.textContent = 'Values taken by more than one edge'
-    h5.style.margin = "0"
-    playground.append(h5)
+    content.append(h5)
     
     pre = document.createElement("pre")
-    pre.style.margin = "0"
-    playground.append(pre)
+    content.append(pre)
     
     pre.textContent += d3.keys(attData.values)
         .sort(function(a, b){ return attData.values[b] - attData.values[a] })
@@ -525,12 +504,10 @@ for (attr in eAttributes) {
   } else if (attData.valuesStats.differentValues - attData.valuesStats.valuesUnitary > 10) {
     h5 = document.createElement("h5")
     h5.textContent = 'Values taken by the most edges (top 10)'
-    h5.style.margin = "0"
-    playground.append(h5)
+    content.append(h5)
     
     pre = document.createElement("pre")
-    pre.style.margin = "0"
-    playground.append(pre)
+    content.append(pre)
 
     pre.textContent += d3.keys(attData.values)
         .sort(function(a, b){ return attData.values[b] - attData.values[a] })
