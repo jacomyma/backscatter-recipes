@@ -1551,10 +1551,10 @@ function tuneColorForLabel(c) {
 }
 
 function getBBox(ctx, fontSize, labelCoordinates, label, factor) {
-  var x = labelCoordinates.x
-  var y = labelCoordinates.y - 0.8 * fontSize
   var w = ctx.measureText(label).width
   var h = fontSize
+  var x = labelCoordinates.x - w/2
+  var y = labelCoordinates.y - 0.8 * fontSize
   var ymargin = (h * factor - h)/2
   // Note: we use y margin as x margin too
   // because labels are wider and we want to have
