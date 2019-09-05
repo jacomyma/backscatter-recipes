@@ -231,6 +231,7 @@ function showModalitiesBlock() {
 	options.background_opacity = settings.block_background_opacity
 	options.text_color = settings.text_color
 	options.alphabetical_order = settings.modalities_list_alpha_order
+	options.others_label = "Others"
 
 	// Compute height
 	var modalities = d3.values(settings.node_clusters.modalities)
@@ -241,7 +242,7 @@ function showModalitiesBlock() {
 	if (represented_nodes < g.order) {
 		rows_count++ // line for other modalities
 	}
-	var height = rows_count * options.row_height
+	var height = rows_count * options.row_height + options.margin
 	console.log("H", height)
 
 	// Create canvas
@@ -270,7 +271,27 @@ function showModalitiesBlock() {
   }
 
 	// Paint modalities
-	console.log(modalities)
+	if (represented_nodes < g.order) {
+		modalities.push({
+			"label": options.others_label,
+      "count": g.order-represented_nodes,
+      "color": settings.node_clusters.default_color
+		})
+	}
+	var yOffset = 0.5 * options.margin
+	modalities.forEach(function(mod){
+		var r = options.row_height - options.margin
+		var x = options.row_height/2
+		var y = yOffset + options.row_height/2
+		console.log("mod "+mod.label,x,y,r)
+    ctx.beginPath()
+    ctx.arc(x, y, r, 0, 2 * Math.PI, false)
+    ctx.lineWidth = 0
+    ctx.fillStyle = mod.color
+    ctx.shadowColor = 'transparent'
+    ctx.fill()
+    yOffset += options.row_height
+	})
 
 }
 
