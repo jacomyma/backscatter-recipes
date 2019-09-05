@@ -56,23 +56,27 @@ angular.module('graphrecipes.view_board', ['ngRoute'])
     $scope.recipe = r
     $scope.status = 'edit'
     $scope.remindRecipe = false
+    $scope.panelTab = 1
   }
 
    $scope.backToRecipe = function() {
     $scope.lcdStatus = 'edit-script'
     $scope.status = 'edit'
     $scope.remindRecipe = true
+    $scope.panelTab = 1
   }
 
   $scope.closeRecipe = function() {
     $scope.recipe = undefined
     $scope.lcdStatus = 'choose-recipe'
     $scope.status = 'list'
+    $scope.panelTab = 0
   }
 
   $scope.executeScript = function() {
     $scope.lcdStatus = 'cooking'
     $scope.status = 'run'
+    $scope.panelTab = 2
     $timeout(function(){
       document.querySelector('#playground').innerHTML = ''
       var code = window.editor.getValue()
