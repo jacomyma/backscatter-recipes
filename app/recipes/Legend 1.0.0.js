@@ -17,6 +17,7 @@ settings.text_color_alt = "#FFF" // Alternative color for data vis figures etc.
 settings.show_title = true
 settings.show_nodes_eges_count = true
 settings.show_modalities_list= true
+settings.show_modalities_distribution = true
 
 settings.title = "NETWORK DETAILS"
 
@@ -99,6 +100,9 @@ if (settings.show_nodes_eges_count) {
 }
 if (settings.show_modalities_list) {
 	showModalitiesBlock()
+}
+if (settings.show_modalities_distribution) {
+	showModalitiesDistributionBlock()
 }
 
 // Title block
@@ -326,7 +330,104 @@ function showModalitiesBlock() {
 
     yOffset += options.row_height
 	})
+}
 
+// Distribution
+function showModalitiesDistributionBlock() {
+	var options = {}
+	options.margin = 6 * settings.width/1000
+	options.font_size_title = 56 * settings.width/1000
+	options.font_size_number = 20 * settings.width/1000
+	options.width = settings.width
+	options.height = Math.ceil(options.width/5)
+  options.font_weight_title = 500
+  options.font_weight_number = 300
+  options.font_family = settings.font_family
+	options.background_color = settings.block_background_color
+	options.background_opacity = settings.block_background_opacity
+	options.text_color_title = settings.text_color
+	options.text_color_number = settings.text_color_alt
+
+	// Create canvas
+	var canvas = document.createElement('canvas')
+	canvas.width = options.width
+	canvas.height = options.height
+	var ctx = canvas.getContext("2d")
+	document.querySelector('#background').appendChild(canvas)
+
+	// Paint background
+	var color = d3.color(options.background_color)
+	color.opacity = options.background_opacity
+	ctx.beginPath()
+  ctx.rect(0, 0, options.width, options.height)
+  ctx.fillStyle = color.toString()
+  ctx.fill()
+  ctx.closePath()
+	
+  // Sort modalities
+	var modalities = d3.values(settings.node_clusters.modalities)
+  if (options.alphabetical_order) {
+  	modalities.sort(function(a,b){
+  		if (a.label<b.label) {
+  			return -1
+  		} else return 1
+  	})
+  }
+
+  // Title
+  ctx.lineWidth = 0
+  ctx.font = options.font_weight_title + " " + options.font_size_title+"px "+options.font_family
+  ctx.fillStyle = options.text_color_title
+  ctx.fillText(
+    'Nodes distribution'
+  , options.margin
+  , options.margin + 1.05 * options.font_size_title
+  )
+  var yOffset = options.margin * 2 + 1.05 * options.font_size_title
+
+	// Paint modalities
+	var represented_nodes = d3.sum(modalities, function(m){
+		return m.count
+	})
+	if (represented_nodes < g.order) {
+		modalities.push({
+			"label": 'Others',
+      "count": g.order-represented_nodes,
+      "color": settings.node_clusters.default_color
+		})
+	}
+	var xOffset = options.margin
+	modalities.forEach(function(mod){
+		// Rectangle
+		var share = mod.count/g.order
+		var w = share * (options.width - 2*options.margin)
+    ctx.lineWidth = 0
+    ctx.fillStyle = mod.color
+    ctx.shadowColor = 'transparent'
+		ctx.fillRect(xOffset, yOffset, w, options.height - options.margin - yOffset)
+    
+    // Text settings
+		ctx.lineWidth = 0
+	  ctx.fillStyle = options.text_color
+
+    // Number label width
+	  ctx.font = options.font_weight_number + " " + options.font_size_number+"px "+options.font_family
+	  var numLabel = Math.round(share*100) + '%'
+	  var numLabelW = ctx.measureText(numLabel).width
+
+	  // Draw label if possible
+	  ctx.fillStyle = options.text_color_number
+    ctx.textAlign = "center"
+	  if (numLabelW < w) {
+	  	ctx.fillText(
+		    numLabel
+		  , xOffset + 0.5 * w
+		  , yOffset + 0.5 * (options.height - options.margin - yOffset) + 0.6*options.font_size_number
+		  )
+	  }
+
+    xOffset += w
+	})
 }
 
 // Helpers
