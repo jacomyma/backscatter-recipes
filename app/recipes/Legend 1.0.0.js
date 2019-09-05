@@ -182,7 +182,7 @@ function showCountsBlock() {
   ctx.fillText(
     txt
   , options.margin
-  , options.height - options.margin - 0.2 * options.font_size
+  , options.height - options.margin - 0.38 * options.font_size
   )
   w = ctx.measureText(txt).width
 
@@ -192,7 +192,7 @@ function showCountsBlock() {
   ctx.fillText(
     txt
   , options.margin + w
-  , options.height - options.margin - 0.2 * options.font_size
+  , options.height - options.margin - 0.38 * options.font_size
   )
   w = ctx.measureText(txt).width
 
@@ -202,7 +202,7 @@ function showCountsBlock() {
   ctx.fillText(
     txt
   , options.width / 2
-  , options.height - options.margin - 0.2 * options.font_size
+  , options.height - options.margin - 0.38 * options.font_size
   )
   w = ctx.measureText(txt).width
 
@@ -212,7 +212,7 @@ function showCountsBlock() {
   ctx.fillText(
     txt
   , options.width / 2 + w
-  , options.height - options.margin - 0.2 * options.font_size
+  , options.height - options.margin - 0.38 * options.font_size
   )
   w = ctx.measureText(txt).width
 }
@@ -280,16 +280,50 @@ function showModalitiesBlock() {
 	}
 	var yOffset = 0.5 * options.margin
 	modalities.forEach(function(mod){
-		var r = options.row_height - options.margin
-		var x = options.row_height/2
+		// Circle
+		var r = options.row_height/2 - 0.5*options.margin
+		var x = options.row_height/2 + 0.5*options.margin
 		var y = yOffset + options.row_height/2
-		console.log("mod "+mod.label,x,y,r)
     ctx.beginPath()
     ctx.arc(x, y, r, 0, 2 * Math.PI, false)
     ctx.lineWidth = 0
     ctx.fillStyle = mod.color
     ctx.shadowColor = 'transparent'
     ctx.fill()
+    
+    // Text settings
+		ctx.lineWidth = 0
+	  ctx.fillStyle = options.text_color
+
+    // Number label width
+	  ctx.font = options.font_weight_regular + " " + options.font_size+"px "+options.font_family
+	  var numLabel = ' '+numberWithCommas(mod.count) + ' nodes'
+	  var numLabelW = ctx.measureText(numLabel).width
+
+	  // Cat label
+	  ctx.font = options.font_weight_bold + " " + options.font_size+"px "+options.font_family
+	  var label = mod.label
+	  if (2*options.margin + 2*r + ctx.measureText(label).width + numLabelW + options.margin > options.width) {
+	  	label = label.substr(0, label.length-1)+'...'
+	  	while (2*options.margin + 2*r + ctx.measureText(label).width + numLabelW + options.margin > options.width) {
+	  		label = label.substr(0, label.length-4)+'...'
+	  	}
+	  }
+	  ctx.fillText(
+	    label
+	  , 2*options.margin + 2*r
+	  , yOffset + options.row_height - 0.5 * options.margin - 0.38 * options.font_size
+	  )
+	  var labelW = ctx.measureText(label).width
+
+	  // Number label
+	  ctx.font = options.font_weight_regular + " " + options.font_size+"px "+options.font_family
+	  ctx.fillText(
+	    numLabel
+	  , 2*options.margin + 2*r + labelW
+	  , yOffset + options.row_height - 0.5 * options.margin - 0.38 * options.font_size
+	  )
+
     yOffset += options.row_height
 	})
 
