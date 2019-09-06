@@ -16,13 +16,15 @@ settings.text_color_alt = "#FFF" // Alternative color for data vis figures etc.
 
 settings.show_title = true
 settings.show_nodes_eges_count = true
-settings.show_modalities_list = false
-settings.show_modalities_distribution = false
+settings.show_modalities_list = true
+settings.show_modalities_distribution = true
 settings.show_modalities_chord_diagram = true
 
 settings.title = "NETWORK DETAILS"
 
 settings.modalities_list_alpha_order = false // Default: biggest to smallest
+
+settings.show_chord_diagram_internal_edges = false // Show edges from a cluster to itself?
 
 // Main clusters and color code:
 // This specifies which is the represented attribute, and which
@@ -440,12 +442,13 @@ function showChordDiagramBlock() {
 	options.margin = 6 * settings.width/1000
 	options.font_size = 56 * settings.width/1000
 	options.width = settings.width
-	options.height = settings.width
+	options.height = settings.width + Math.ceil(1.05 * options.font_size)
   options.font_weight = 500
   options.font_family = settings.font_family
 	options.background_color = settings.block_background_color
 	options.background_opacity = settings.block_background_opacity
 	options.text_color = settings.text_color
+	options.auto_edges = settings.show_chord_diagram_internal_edges
 	options.title = 'Connections'
 
 	// Create canvas
@@ -527,10 +530,45 @@ function showChordDiagramBlock() {
   	} else {
   		tmod = false
   	}
-  	matrix[modToId[smod]][modToId[tmod]]++
+  	if (options.auto_edges || smod != tmod) {
+	  	matrix[modToId[smod]][modToId[tmod]]++
+  	}
   })
 
-  console.log(matrix)
+  // Draw Chord diagram
+  var res = d3.chord()
+    .padAngle(0.05)     // padding between entities (black arc)
+    .sortSubgroups(d3.descending)
+    (matrix)
+  console.log('res', res)
+
+	ctx.lineWidth = 0
+  ctx.shadowColor = 'transparent'
+  res.groups.forEach(function(d, i){
+  	var mod = modalities[i]
+    ctx.fillStyle = mod.color
+    ctx.translate(options.width/2, options.height - options.width/2)
+  	var arc = d3.arc()
+  		.innerRadius(0.9*(options.width/2-options.margin))
+	    .outerRadius(options.width/2-options.margin)
+	  ctx.beginPath()
+	  arc.context(ctx)(d)
+	  ctx.fill()
+	  ctx.setTransform(1, 0, 0, 1, 0, 0) // reset
+  })
+
+  ctx.lineWidth = 0
+  ctx.shadowColor = 'transparent'
+  res.forEach(function(d){
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)'
+    ctx.translate(options.width/2, options.height - options.width/2)
+  	var arc = d3.ribbon()
+  		.radius(0.9*(options.width/2-options.margin))
+	  ctx.beginPath()
+	  arc.context(ctx)(d)
+	  ctx.fill()
+	  ctx.setTransform(1, 0, 0, 1, 0, 0) // reset
+  })
 }
 
 // Helpers
