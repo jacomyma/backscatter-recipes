@@ -16,8 +16,9 @@ settings.text_color_alt = "#FFF" // Alternative color for data vis figures etc.
 
 settings.show_title = true
 settings.show_nodes_eges_count = true
-settings.show_modalities_list= true
-settings.show_modalities_distribution = true
+settings.show_modalities_list = false
+settings.show_modalities_distribution = false
+settings.show_modalities_chord_diagram = true
 
 settings.title = "NETWORK DETAILS"
 
@@ -104,6 +105,10 @@ if (settings.show_modalities_list) {
 if (settings.show_modalities_distribution) {
 	showModalitiesDistributionBlock()
 }
+if (settings.show_modalities_chord_diagram) {
+	showChordDiagramBlock()
+}
+
 
 // Title block
 function showTitleBlock() {
@@ -428,6 +433,104 @@ function showModalitiesDistributionBlock() {
 
     xOffset += w
 	})
+}
+
+function showChordDiagramBlock() {
+	var options = {}
+	options.margin = 6 * settings.width/1000
+	options.font_size = 56 * settings.width/1000
+	options.width = settings.width
+	options.height = settings.width
+  options.font_weight = 500
+  options.font_family = settings.font_family
+	options.background_color = settings.block_background_color
+	options.background_opacity = settings.block_background_opacity
+	options.text_color = settings.text_color
+	options.title = 'Connections'
+
+	// Create canvas
+	var canvas = document.createElement('canvas')
+	canvas.width = options.width
+	canvas.height = options.height
+	var ctx = canvas.getContext("2d")
+	document.querySelector('#background').appendChild(canvas)
+
+	// Paint background
+	var color = d3.color(options.background_color)
+	color.opacity = options.background_opacity
+	ctx.beginPath()
+  ctx.rect(0, 0, options.width, options.height)
+  ctx.fillStyle = color.toString()
+  ctx.fill()
+  ctx.closePath()
+	
+  // Sort modalities
+	var modalities = d3.values(settings.node_clusters.modalities)
+  if (options.alphabetical_order) {
+  	modalities.sort(function(a,b){
+  		if (a.label<b.label) {
+  			return -1
+  		} else return 1
+  	})
+  }
+
+  // Title
+  ctx.lineWidth = 0
+  ctx.font = options.font_weight + " " + options.font_size+"px "+options.font_family
+  ctx.fillStyle = options.text_color
+  ctx.fillText(
+    options.title
+  , options.margin
+  , options.margin + 1.05 * options.font_size
+  )
+  var yOffset = options.margin * 2 + 1.05 * options.font_size
+
+  // "Others" modality
+  var represented_nodes = d3.sum(modalities, function(m){
+		return m.count
+	})
+	if (represented_nodes < g.order) {
+		modalities.push({
+			"label": false,
+      "count": g.order-represented_nodes,
+      "color": settings.node_clusters.default_color
+		})
+	}
+
+  // Build connections matrix
+  var idToMod = {}
+  var modToId = {}
+  var matrix = []
+  modalities.forEach(function(mod,i){
+  	var m = mod.label
+  	idToMod[i] = m
+  	modToId[m] = i
+  	matrix[i] = []
+  })
+  matrix.forEach(function(row){
+	  modalities.forEach(function(m,i){
+	  	row[i] = 0
+	  })  	
+  })
+  g.edges().forEach(function(eid){
+  	var sid = g.source(eid)
+  	var tid = g.target(eid)
+  	var smod = settings.node_clusters.modalities[g.getNodeAttribute(sid, settings.node_clusters.attribute_id)]
+  	var tmod = settings.node_clusters.modalities[g.getNodeAttribute(tid, settings.node_clusters.attribute_id)]
+  	if (smod) {
+  		smod = smod.label
+  	} else {
+  		smod = false
+  	}
+  	if (tmod) {
+  		tmod = tmod.label
+  	} else {
+  		tmod = false
+  	}
+  	matrix[modToId[smod]][modToId[tmod]]++
+  })
+
+  console.log(matrix)
 }
 
 // Helpers
