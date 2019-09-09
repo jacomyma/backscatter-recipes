@@ -18,6 +18,7 @@ settings.show_title = true
 settings.show_nodes_eges_count = true
 settings.show_modalities_list = true
 settings.show_modalities_distribution = true
+settings.show_density = true
 settings.show_modalities_chord_diagram = true
 
 settings.title = "NETWORK DETAILS"
@@ -106,6 +107,9 @@ if (settings.show_modalities_list) {
 }
 if (settings.show_modalities_distribution) {
 	showModalitiesDistributionBlock()
+}
+if (settings.show_density) {
+	showDensityBlock()
 }
 if (settings.show_modalities_chord_diagram) {
 	showChordDiagramBlock()
@@ -228,7 +232,7 @@ function showCountsBlock() {
   w = ctx.measureText(txt).width
 }
 
-// Modalities
+// Modalities block
 function showModalitiesBlock() {
 	var options = {}
 	options.margin = 6 * settings.width/1000
@@ -339,7 +343,7 @@ function showModalitiesBlock() {
 	})
 }
 
-// Distribution
+// Distribution block
 function showModalitiesDistributionBlock() {
 	var options = {}
 	options.margin = 6 * settings.width/1000
@@ -437,6 +441,64 @@ function showModalitiesDistributionBlock() {
 	})
 }
 
+// Density block
+function showDensityBlock() {
+	var options = {}
+	options.margin = 6 * settings.width/1000
+	options.font_size = 56 * settings.width/1000
+	options.width = settings.width
+	options.height = Math.ceil(2 * options.margin + 1.25 * options.font_size)
+  options.font_weight_bold = 500
+  options.font_weight_regular = 300
+  options.font_family = settings.font_family
+	options.background_color = settings.block_background_color
+	options.background_opacity = settings.block_background_opacity
+	options.text_color = settings.text_color
+
+	// Create canvas
+	var canvas = document.createElement('canvas')
+	canvas.width = options.width
+	canvas.height = options.height
+	var ctx = canvas.getContext("2d")
+	document.querySelector('#background').appendChild(canvas)
+
+	// Paint background
+	var color = d3.color(options.background_color)
+	color.opacity = options.background_opacity
+	ctx.beginPath()
+  ctx.rect(0, 0, options.width, options.height)
+  ctx.fillStyle = color.toString()
+  ctx.fill()
+  ctx.closePath()
+
+  // Text
+  var w, txt
+  ctx.lineWidth = 0
+  ctx.fillStyle = options.text_color
+
+  ctx.font = options.font_weight_bold + " " + options.font_size+"px "+options.font_family
+  txt = "Network density: "
+  
+  ctx.fillText(
+    txt
+  , options.margin
+  , options.height - options.margin - 0.38 * options.font_size
+  )
+  w = ctx.measureText(txt).width
+
+  ctx.font = options.font_weight_regular + " " + options.font_size+"px "+options.font_family
+  var density = graphology.library.metrics.density(g)
+  density = Math.round(density*10000)/100
+  txt = density + '%'
+  
+  ctx.fillText(
+    txt
+  , options.margin + w
+  , options.height - options.margin - 0.38 * options.font_size
+  )
+}
+
+// Chord diagran (connections) block
 function showChordDiagramBlock() {
 	var options = {}
 	options.margin = 6 * settings.width/1000
@@ -540,7 +602,6 @@ function showChordDiagramBlock() {
     .padAngle(0.05)     // padding between entities (black arc)
     .sortSubgroups(d3.descending)
     (matrix)
-  console.log('res', res)
 
 	ctx.lineWidth = 0
   ctx.shadowColor = 'transparent'
