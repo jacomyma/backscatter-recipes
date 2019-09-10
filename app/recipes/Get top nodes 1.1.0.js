@@ -48,6 +48,7 @@ myNodes = myNodes.filter(function(nid, i){
 })
 
 // Write the output
+document.querySelector('#playground').innerHTML = ''
 var ta = document.createElement("textarea")
 ta.cols = "30"
 ta.rows = "10"
