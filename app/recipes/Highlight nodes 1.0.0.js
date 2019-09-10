@@ -34,6 +34,7 @@ settings.draw_cluster_fills = false
 settings.draw_cluster_contours = false
 settings.draw_cluster_labels = false
 settings.draw_edges = true
+settings.draw_edges_highlight = false
 settings.draw_nodes = true
 settings.draw_nodes_highlight = true
 settings.draw_node_labels = true
@@ -89,14 +90,13 @@ settings.edge_high_quality = false // Halo around nodes // Time-consuming
 settings.node_size = 1 // Factor to adjust the nodes drawing size
 
 // Layer: Nodes highlight
-settings.node_highlight_color = "#263238"
+settings.node_highlight_color = "#FFF"
 settings.node_highlight_stroke = 3 // in px based on 1MP 72dpi
-settings.node_highlight_edges = true // Also highlight mutual edges
 
 // Layer: Node labels
 settings.label_font_size = 20 // in pt based on 1MP 72dpi
 settings.label_font_weight = 500
-settings.label_border_thickness = 6
+settings.label_border_thickness = 2
 
 // Main clusters and color code:
 // Clusters are defined by the modalities of a given attribute.
@@ -1305,7 +1305,7 @@ function drawNodesHighlightLayer(ctx) {
   options.stroke_width = settings.node_highlight_stroke * Math.min(settings.width, settings.height)/1000
   options.offset = settings.node_highlight_stroke * Math.min(settings.width, settings.height)/1000
   options.stroke_color = settings.node_highlight_color
-  options.highlight_edges = settings.node_highlight_edges
+  options.highlight_edges = settings.draw_edges_highlight
 
   // Clear canvas
   ctx.clearRect(0, 0, settings.width, settings.height)

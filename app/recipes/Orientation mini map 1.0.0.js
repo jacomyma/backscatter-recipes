@@ -64,6 +64,7 @@ settings.edge_thickness = 0.3 // in px based on 1MP
 settings.edge_highlighted_alpha = 0.5 // Opacity for main edges // Range from 0 to 1
 settings.edge_muted_alpha = 0.15 // Opacity for other edges // Range from 0 to 1
 settings.edge_high_quality = false // Halo around nodes // Time-consuming
+settings.edge_show_part = 1 // Range from 0 to 1 // 0 hides all edges, 1 shows all
 
 // Layer: Nodes
 settings.node_size = 1 // Factor to adjust the nodes drawing size
@@ -697,7 +698,15 @@ function drawNetworkShapeContourLayer(ctx, networkShapeImprint) {
 
 function drawHEdgesLayer(ctx, voronoiData) {
   log("Draw highlighted edges...")
+  var seed = 1
+  function random() { // Simple though poor random function
+    var x = Math.sin(seed++) * 10000
+    return x - Math.floor(x)
+  }
   var edges = g.edges()
+    .filter(function(){
+        return random()<=settings.edge_show_part
+      })
     .filter(function(eid){
       var ns = g.getNodeAttributes(g.source(eid))
       var nt = g.getNodeAttributes(g.target(eid))
@@ -712,7 +721,15 @@ function drawHEdgesLayer(ctx, voronoiData) {
 
 function drawMEdgesLayer(ctx, voronoiData) {
   log("Draw muted edges...")
+  var seed = 1
+  function random() { // Simple though poor random function
+    var x = Math.sin(seed++) * 10000
+    return x - Math.floor(x)
+  }
   var edges = g.edges()
+    .filter(function(){
+        return random()<=settings.edge_show_part
+      })
     .filter(function(eid){
       var ns = g.getNodeAttributes(g.source(eid))
       var nt = g.getNodeAttributes(g.target(eid))

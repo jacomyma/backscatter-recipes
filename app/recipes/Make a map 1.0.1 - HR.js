@@ -83,6 +83,7 @@ settings.cluster_label_outline_thickness = 4 // in px based on 1MP 72dpi
 settings.edge_thickness = 0.3 // in px based on 1MP
 settings.edge_alpha = 0.5 // Opacity // Range from 0 to 1
 settings.edge_high_quality = true // Halo around nodes // Time-consuming
+settings.edge_show_part = 1 // Range from 0 to 1 // 0 hides all edges, 1 shows all
 
 // Layer: Nodes
 settings.node_size = 0.8 // Factor to adjust the nodes drawing size
@@ -1045,6 +1046,7 @@ function drawEdgesLayer(ctx, voronoiData) {
   options.display_voronoi = false // for monitoring purpose
   options.display_edges = true // disable for monitoring purpose
   options.max_edge_count = Infinity // for monitoring only
+  options.edge_display_ratio = settings.edge_show_part
   options.edge_thickness = settings.edge_thickness*Math.min(settings.width, settings.height) / 1000
   options.edge_alpha = settings.edge_alpha
   options.edge_color = "#FFF"
@@ -1142,7 +1144,19 @@ function drawEdgesLayer(ctx, voronoiData) {
     ctx.lineJoin="round"
     ctx.fillStyle = 'rgba(0, 0, 0, 0)';
     ctx.lineWidth = options.edge_thickness
-    g.edges()
+    var edgesToDisplay = g.edges()
+    // Hide a part at random
+    if (options.edge_display_ratio<1) {
+      var seed = 1
+      function random() { // Simple though poor random function
+        var x = Math.sin(seed++) * 10000
+        return x - Math.floor(x)
+      }
+      edgesToDisplay = edgesToDisplay.filter(function(){
+        return random()<=options.edge_display_ratio
+      })
+    }
+    edgesToDisplay
       .filter(function(eid, i_){ return i_ < options.max_edge_count })
       .forEach(function(eid, i_){
       if ((i_+1)%10000 == 0) {
