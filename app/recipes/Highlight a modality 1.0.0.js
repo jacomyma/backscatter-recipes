@@ -74,6 +74,7 @@ settings.edge_high_quality = false // Halo around nodes // Time-consuming
 settings.node_size = 1 // Factor to adjust the nodes drawing size
 
 // Layer: Node labels
+settings.label_limit = Infinity // Limit the count of labels. Infinity is a valid number.
 settings.label_font_min_size = 16 // in pt based on 1MP 72dpi
 settings.label_font_max_size = 32  // in pt based on 1MP 72dpi
 settings.label_border_thickness = 0
@@ -1007,7 +1008,7 @@ function drawNodeLabelsLayer(ctx, nodesBySize_) {
   log("Draw node labels...")
   var options = {}
   options.draw_labels = true
-  options.label_count = Infinity
+  options.label_count = settings.label_limit
   options.colored_labels = false
   options.default_color_label = settings.label_color
   options.sized_labels = true

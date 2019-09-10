@@ -94,6 +94,7 @@ settings.node_highlight_color = "#FFF"
 settings.node_highlight_stroke = 3 // in px based on 1MP 72dpi
 
 // Layer: Node labels
+settings.label_limit = Infinity // Limit the count of labels. Infinity is a valid number.
 settings.label_font_size = 20 // in pt based on 1MP 72dpi
 settings.label_font_weight = 500
 settings.label_border_thickness = 2
@@ -1382,7 +1383,7 @@ function drawNodeLabelsLayer(ctx, nodesBySize_) {
   log("Draw node labels...")
   var options = {}
   options.draw_labels = true
-  options.label_count = Infinity
+  options.label_count = settings.label_limit
   options.label_color = settings.node_highlight_color
   options.label_spacing_factor = 1.5 // 1=normal; 2=box twice as wide/high etc.
   options.font_family = 'Oswald, sans-serif'
