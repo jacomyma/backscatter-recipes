@@ -68,6 +68,7 @@ settings.edge_show_part = 1 // Range from 0 to 1 // 0 hides all edges, 1 shows a
 
 // Layer: Nodes
 settings.node_size = 1 // Factor to adjust the nodes drawing size
+settings.node_highlighted_size = 3 // Idem but for highlighted nodes
 
 // Layer: Node labels
 settings.label_limit = Infinity // Limit the count of labels. Infinity is a valid number.
@@ -1020,9 +1021,11 @@ function drawNodesLayer(ctx, nodesBySize, highlighted) {
       color = "#ccc5c0"
     }
 
-    var radius = Math.max(settings.node_size * n.size, 2)
+    var radius
     if (highlighted) {
-      radius *= 2
+      radius = Math.max(settings.node_highlighted_size * n.size, 2)
+    } else {
+      radius = Math.max(settings.node_size * n.size, 2)
     }
 
     ctx.lineCap="round"
