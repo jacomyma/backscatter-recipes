@@ -52,49 +52,43 @@ angular.module('graphrecipes.view_board', ['ngRoute'])
   }
 
   $scope.pickRecipe = function(r) {
-    $scope.lcdStatus = 'edit-script'
     $scope.recipe = r
     $scope.status = 'edit'
     $scope.remindRecipe = false
+    $scope.panelTab = 1
   }
 
    $scope.backToRecipe = function() {
-    $scope.lcdStatus = 'edit-script'
     $scope.status = 'edit'
     $scope.remindRecipe = true
+    $scope.panelTab = 1
   }
 
   $scope.closeRecipe = function() {
     $scope.recipe = undefined
-    $scope.lcdStatus = 'choose-recipe'
     $scope.status = 'list'
+    $scope.panelTab = 0
   }
 
   $scope.executeScript = function() {
-    $scope.lcdStatus = 'cooking'
     $scope.status = 'run'
+    $scope.panelTab = 2
     $timeout(function(){
-      document.querySelector('#playground').innerHTML = ''
-      var code = window.editor.getValue()
-      try {
-        eval(';(function(){'+code+'})();')
-        $scope.lcdStatus = 'service'
-        $scope.status = 'end'
-
-        // Stop after a while
-        $timeout(function(){
-          if ($scope.lcdStatus == 'service')
-            $scope.lcdStatus = 'waiting'
-        }, 10000)
-      } catch(e) {
-        $scope.lcdStatus = 'error'
-        console.error('[Script error]', e)
-        $timeout(function(){
-          alert('Merde :(\nThere is an issue with this script:\n\n' + e)
-          $scope.backToRecipe()
-        })
-      }
-    }, 4000)
+      document.querySelector('#playground').innerHTML = '<div style="padding:12px">⌛ Please wait...</div>'
+      $timeout(function(){
+        var code = window.editor.getValue()
+        try {
+          eval(';(function(){'+code+'})();')
+          $scope.status = 'end'
+        } catch(e) {
+          console.error('[Script error]', e)
+          $timeout(function(){
+            alert('Oops :(\nThere is an issue with this script:\n\n' + e)
+            $scope.backToRecipe()
+          })
+        }
+      }, 1000)
+      })
   }
 
   // Init

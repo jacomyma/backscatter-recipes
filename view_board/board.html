@@ -46,53 +46,64 @@
     </div>
   </div>
 
-  <div layout class="content" flex>
-    <div layout="column" layout-fill class="fancy-text" ng-if="status=='list'">
-      <div layout-padding class="menu-container">
-        <h1 class="main-title">Recipes</h1>
+  <div layout="column" flex>
+    <md-tabs layout-fill class="md-primary" md-center-tabs md-selected="panelTab">
+      <md-tab label="Scripts">
+        <div layout layout-fill flex class="content">
+          <div layout="column" layout-fill class="fancy-text">
+            <div layout-padding class="menu-container">
+              <h1 class="main-title">Recipes</h1>
 
-        <div layout="column" ng-repeat="r in recipes" class="menu-item" ng-click="pickRecipe(r)">
-          <h3>{{r.name}}</h3>
-          <p>{{r.desc}}</p>
+              <div layout="column" ng-repeat="r in recipes" class="menu-item" ng-click="pickRecipe(r)">
+                <h3>{{r.name}}</h3>
+                <p>{{r.desc}}</p>
+              </div>
+
+              <div flex></div>
+            </div>
+          </div>
         </div>
+      </md-tab>
+      <md-tab label="Edit">
+        <div layout layout-fill flex class="content">
+          <div layout="column" layout-fill class="fancy-text" ng-if="status=='edit' || status=='run' || status=='end'">
+            <div layout="row">
+              <div layout="column" layout-padding flex>
+                <h3 class="script-title">{{recipe.name}}</h3>
+                {{recipe.desc}}
+              </div>
+              <div class="close-recipe">
+                <md-button class="md-icon-button" aria-label="Close" ng-click="closeRecipe()">
+                  <md-icon>close</md-icon>
+                </md-button>
+              </div>
+            </div>
 
-        <div flex></div>
-      </div>
-    </div>
+            <div class="exec-button-row">
+              <md-button
+                ng-click="executeScript()"
+                title="Execute recipe"
+                class="md-raised"
+              ><md-icon>play_arrow</md-icon> Execute recipe</md-button>
+              <span class="shortcut-info">or hit [CTRL] + [ENTER] from the panel</span>
+            </div>
 
-    <div layout="column" layout-fill class="fancy-text" ng-if="status=='edit'">
-      <div layout="row" ng-if="status=='edit'">
-        <div layout="column" layout-padding flex>
-          <h3 class="script-title">{{recipe.name}}</h3>
-          {{recipe.desc}}
+            <!-- <div ng-show="status=='run'" flex layout="column" layout-align="center center">
+              <h3 class="script-title">{{recipe.name}}</h3>
+              is being processed<br><br><br>
+            </div> -->
+
+            <div js-editor file="'recipes/'+recipe.file" remind="remindRecipe" flex></div>
+          </div>
         </div>
-        <div class="close-recipe">
-          <md-button class="md-icon-button" aria-label="Close" ng-click="closeRecipe()">
-            <md-icon>close</md-icon>
-          </md-button>
+      </md-tab>
+      <md-tab label="Output">
+        <div layout layout-fill flex class="content">
+          <div layout="column" layout-fill ng-if="status=='run' || status=='end'" id="playground">
+          </div>
         </div>
-      </div>
-
-      <div class="exec-button-row" ng-show="status=='edit'">
-        <md-button
-          ng-click="executeScript()"
-          title="Execute recipe"
-          class="md-raised"
-        ><md-icon>play_arrow</md-icon> Execute recipe</md-button>
-        <span class="shortcut-info">or hit [CTRL] + [ENTER] from the panel</span>
-      </div>
-
-      <!-- <div ng-show="status=='run'" flex layout="column" layout-align="center center">
-        <h3 class="script-title">{{recipe.name}}</h3>
-        is being processed<br><br><br>
-      </div> -->
-
-      <div js-editor file="'recipes/'+recipe.file" remind="remindRecipe" flex ng-if="status=='edit'"></div>
-    </div>
-
-    <div layout="column" layout-fill layout-padding ng-if="status=='run' || status=='end'" id="playground">
-    </div>
-
+      </md-tab>
+    </md-tabs>
   </div>
 
 </div>
