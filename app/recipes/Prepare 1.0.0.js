@@ -30,52 +30,18 @@ settings.maximum_modalities = 10
 //       - the last color is the default for small/other clusters
 
 settings.default_palette = [
-  "#6fc5a4", // Light green
-  "#f26b6e", // Red
-  "#b9a2ce", // Light indigo
-  "#e8a74b", // Yellow
-  "#658ec9", // Light blue
-  "#ce6028", // Dark orange
-  "#f2a5a6", // Pink
-  "#4aa05b", // Dark green
-  "#b65887", // Purple
-  "#7169af", // Dark indigo
-  "#9d9b99"  // Grey
+  "#6BDEB6", // MINT GREEN
+  "#5B5FFF", // INDIGO BLUE
+  "#F8686D", // RED
+  "#AAAEFB", // VIOLET
+  "#FEBBCF", // PINK
+  "#A067D4", // PURPLE
+  "#FAEC7E", // YELLOW
+  "#3C9E8A", // GREEN
+  "#FC8550", // ORANGE
+  "#9F9F9F", // GREY
+  "#C6C5C7"  // LIGHT GREY
 ]
-
-/*
-// Backscatter original palette from the specification
-settings.default_palette = [
-  "#8CDEC0", // Light green
-  "#FF5A60", // Red
-  "#B6BCFE", // Light blue
-  "#FDDD82", // Yellow
-  "#5D65D4", // Dark blue
-  "#FF8B5C", // Orange
-  "#FFB0B4", // Pink
-  "#49BA95", // Green
-  "#9065AE", // Purple
-  "#848CD2", // Blue
-  "#8B8B8B"  // Grey
-]
-
-// Mathieu's tuning of the original palette:
-// - A narrower lightness range, better on a semiotic level
-// - Less similar hues
-settings.default_palette = [
-  "#6fc5a4", // Light green
-  "#f26b6e", // Red
-  "#b9a2ce", // Light indigo
-  "#e8a74b", // Yellow
-  "#658ec9", // Light blue
-  "#ce6028", // Dark orange
-  "#f2a5a6", // Pink
-  "#4aa05b", // Dark green
-  "#b65887", // Purple
-  "#7169af", // Dark indigo
-  "#9d9b99"  // Grey
-]
-*/
 
 /// END OF SETTINGS
 

@@ -48,55 +48,55 @@ settings.node_clusters = {
     "Digital industries": {
       "label": "Digital industries",
       "count": 595,
-      "color": "#6fc5a4"
+      "color": "#6BDEB6"
     },
     "Arts and Crafts": {
-      "label": "Arts and Crafts",
+      "label": "Arts & Crafts",
       "count": 298,
-      "color": "#f26b6e"
+      "color": "#5B5FFF"
     },
     "Film & TV": {
       "label": "Film & TV",
       "count": 221,
-      "color": "#b9a2ce"
+      "color": "#F8686D"
     },
     "Advertising, marketing and public relations": {
-      "label": "Advertising, marketing and public relations",
+      "label": "Advertising, marketing & public relations",
       "count": 192,
-      "color": "#e8a74b"
+      "color": "#AAAEFB"
     },
     "Architecture;Andet": {
       "label": "Architecture",
       "count": 182,
-      "color": "#658ec9"
+      "color": "#FEBBCF"
     },
     "Fashion and textiles": {
-      "label": "Fashion and textiles",
+      "label": "Fashion & textiles",
       "count": 160,
-      "color": "#ce6028"
+      "color": "#A067D4"
     },
     "Design": {
       "label": "Design",
       "count": 159,
-      "color": "#f2a5a6"
+      "color": "#FAEC7E"
     },
     "Music": {
       "label": "Music",
       "count": 145,
-      "color": "#4aa05b"
+      "color": "#3C9E8A"
     },
     "Advertising, marketing and public relations | Architecture;Andet | Arts and Crafts | Design | Digital industries | Fashion and textiles | Film & TV | Music": {
       "label": "Multiple",
       "count": 58,
-      "color": "#b65887"
+      "color": "#FC8550"
     },
     "Arts and Crafts | Music": {
-      "label": "Arts and Crafts & Music",
+      "label": "Arts & Crafts + Music",
       "count": 36,
-      "color": "#7169af"
+      "color": "#9F9F9F"
     }
   },
-  "default_color": "#9d9b99"
+  "default_color": "#C6C5C7"
 }
 
 /// (END OF SETTINGS)

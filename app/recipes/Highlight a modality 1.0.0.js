@@ -56,10 +56,8 @@ settings.draw_node_labels = true
 settings.draw_highlighted_edges_over_muted_nodes = true
 
 // Layer: Background
-// Original Backscatter palette: "#D9D8DA"
-// Lighter for more contrast, a little warm: "#e0dcd9"
 settings.background_circle = false
-settings.background_color = "#e0dcd9"
+settings.background_color = "#DCDCDC"
 
 // Layer: Network shape
 //        (a potato for the whole network)
@@ -101,15 +99,15 @@ settings.node_clusters = {
     "Architecture;Andet": {
       "label": "Architecture",
       "count": 182,
-      "color": "#658ec9"
+      "color": "#FEBBCF"
     },
     "Design": {
       "label": "Design",
       "count": 159,
-      "color": "#f2a5a6"
+      "color": "#FAEC7E"
     }
   },
-  "default_color": "#9d9b99"
+  "default_color": "#C6C5C7"
 }
 
 // Advanced settings
