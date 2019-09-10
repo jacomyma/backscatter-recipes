@@ -23,7 +23,6 @@ angular.module('graphrecipes.view_board', ['ngRoute'])
   $scope.edgesCount
   $scope.recipes = recipesList
   $scope.recipe = undefined
-  $scope.lcdStatus = 'choose-recipe'
   $scope.status = 'list' // list | edit | run | end
 
   // Scope functions
@@ -50,6 +49,12 @@ angular.module('graphrecipes.view_board', ['ngRoute'])
     var blob = new Blob([xml], {'type':'text/gexf+xml;charset=utf-8'});
     saveAs(blob, store.get('graphname') + " via Graph Recipes.gexf");
   }
+
+  $scope.$watch('panelTab', function(_new,_old) {
+    if (_new == 0 && _old !=0) {
+      $scope.closeRecipe()
+    }
+  })
 
   $scope.pickRecipe = function(r) {
     $scope.recipe = r
