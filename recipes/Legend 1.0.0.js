@@ -19,7 +19,7 @@ var settings = {}
 
 settings.width = 1000
 settings.general_background_color = "#C6C5C7" // Only visible if block background is transparent
-settings.block_background_opacity = 0 // Ranges from 0 to 1. 0=transparent, 1=opaque
+settings.block_background_opacity = 1 // Ranges from 0 to 1. 0=transparent, 1=opaque
 settings.block_background_color = "#DCDCDC"
 settings.font_family = "'Oswald', sans-serif"
 settings.text_color = "#000"
