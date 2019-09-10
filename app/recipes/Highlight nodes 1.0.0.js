@@ -64,11 +64,11 @@ settings.background_color = "#e0dcd9"
 settings.network_shape_spreading = 0.9 // Range: 0.01 to 0.99 // Balanced: 0.5 // Acts on size
 settings.network_shape_smoothness = 0 // Range: 0 to 10 or more // Makes rounder clusters
 // ...shape fill
-settings.network_shape_fill_alpha = 0.4 // Opacity // Range from 0 to 1
+settings.network_shape_fill_opacity = 0.4 // Opacity // Range from 0 to 1
 settings.network_shape_fill_color = "#cdc7c3"
 // ...shape contour
 settings.network_shape_contour_thickness = 3 // Min: 1
-settings.network_shape_contour_alpha = 1 // Opacity // Range from 0 to 1
+settings.network_shape_contour_opacity = 1 // Opacity // Range from 0 to 1
 settings.network_shape_contour_color = "#cdc7c3"
 
 // Layer: Clusters
@@ -83,7 +83,7 @@ settings.cluster_fill_color_by_modality = true // if false, use default color be
 settings.cluster_fill_color_default = "#8B8B8B"
 // ...cluster contours
 settings.cluster_contour_thickness = 3 // Range: 0 to 10 or more
-settings.cluster_contour_alpha = 1 // Opacity // Range from 0 to 1
+settings.cluster_contour_opacity = 1 // Opacity // Range from 0 to 1
 settings.cluster_contour_color_by_modality = true // if false, use default color below
 settings.cluster_contour_color_default = "#8B8B8B"
 // ...cluster labels
@@ -93,7 +93,7 @@ settings.cluster_label_outline_thickness = 4 // in px based on 1MP 72dpi
 
 // Layer: Edges
 settings.edge_thickness = 0.3 // in px based on 1MP
-settings.edge_alpha = 0.5 // Opacity // Range from 0 to 1
+settings.edge_opacity = 0.5 // Opacity // Range from 0 to 1
 settings.edge_high_quality = false // Halo around nodes // Time-consuming
 
 // Layer: Nodes
@@ -881,7 +881,7 @@ function drawNetworkShapeFillLayer(ctx, networkShapeImprint) {
     pix[i  ] = rgb.r // red
     pix[i+1] = rgb.g // green
     pix[i+2] = rgb.b // blue
-    pix[i+3] = Math.floor(settings.network_shape_fill_alpha * pix[i+3]) // alpha
+    pix[i+3] = Math.floor(settings.network_shape_fill_opacity * pix[i+3]) // alpha
   }
 
   // Convolute: slight blur (for antialiasing)
@@ -952,7 +952,7 @@ function drawNetworkShapeContourLayer(ctx, networkShapeImprint) {
     pix[i  ] = rgb.r // red
     pix[i+1] = rgb.g // green
     pix[i+2] = rgb.b // blue
-    pix[i+3] = Math.floor(settings.network_shape_contour_alpha * pix[i+3]) // alpha
+    pix[i+3] = Math.floor(settings.network_shape_contour_opacity * pix[i+3]) // alpha
   }
 
   report("...done.")
@@ -1082,7 +1082,7 @@ function drawClustersContourLayer(ctx, clusterImprints, modalities) {
       pix[i  ] = rgb.r // red
       pix[i+1] = rgb.g // green
       pix[i+2] = rgb.b // blue
-      pix[i+3] = Math.floor(settings.cluster_contour_alpha * pix[i+3]) // alpha
+      pix[i+3] = Math.floor(settings.cluster_contour_opacity * pix[i+3]) // alpha
     }
 
     report("...done.")
@@ -1097,7 +1097,7 @@ function drawEdgesLayer(ctx, voronoiData) {
   options.display_edges = true // disable for monitoring purpose
   options.max_edge_count = Infinity // for monitoring only
   options.edge_thickness = settings.edge_thickness*Math.min(settings.width, settings.height) / 1000
-  options.edge_alpha = settings.edge_alpha
+  options.edge_opacity = settings.edge_opacity
   options.edge_color = "#FFF"
   options.node_halo = settings.edge_high_quality
 
@@ -1274,7 +1274,7 @@ function drawEdgesLayer(ctx, voronoiData) {
   report("...done.")
   return multiplyAlpha(
     ctx.getImageData(0, 0, settings.width, settings.height),
-    options.edge_alpha
+    options.edge_opacity
   )
 }
 

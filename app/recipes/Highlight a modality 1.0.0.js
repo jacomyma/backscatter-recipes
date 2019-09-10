@@ -67,17 +67,17 @@ settings.background_color = "#e0dcd9"
 settings.network_shape_spreading = 0.9 // Range: 0.01 to 0.99 // Balanced: 0.5 // Acts on size
 settings.network_shape_smoothness = 0 // Range: 0 to 10 or more // Makes rounder clusters
 // ...shape fill
-settings.network_shape_fill_alpha = 0.4 // Opacity // Range from 0 to 1
+settings.network_shape_fill_opacity = 0.4 // Opacity // Range from 0 to 1
 settings.network_shape_fill_color = "#cdc7c3"
 // ...shape contour
 settings.network_shape_contour_thickness = 3 // Min: 1
-settings.network_shape_contour_alpha = 1 // Opacity // Range from 0 to 1
+settings.network_shape_contour_opacity = 1 // Opacity // Range from 0 to 1
 settings.network_shape_contour_color = "#cdc7c3"
 
 // Layer: Edges
 settings.edge_thickness = 0.3 // in px based on 1MP
-settings.edge_highlighted_alpha = 0.7 // Opacity for main edges // Range from 0 to 1
-settings.edge_muted_alpha = 0.15 // Opacity for other edges // Range from 0 to 1
+settings.edge_highlighted_opacity = 0.7 // Opacity for main edges // Range from 0 to 1
+settings.edge_muted_opacity = 0.15 // Opacity for other edges // Range from 0 to 1
 settings.edge_high_quality = false // Halo around nodes // Time-consuming
 
 // Layer: Nodes
@@ -666,7 +666,7 @@ function drawNetworkShapeFillLayer(ctx, networkShapeImprint) {
     pix[i  ] = rgb.r // red
     pix[i+1] = rgb.g // green
     pix[i+2] = rgb.b // blue
-    pix[i+3] = Math.floor(settings.network_shape_fill_alpha * pix[i+3]) // alpha
+    pix[i+3] = Math.floor(settings.network_shape_fill_opacity * pix[i+3]) // alpha
   }
 
   // Convolute: slight blur (for antialiasing)
@@ -737,7 +737,7 @@ function drawNetworkShapeContourLayer(ctx, networkShapeImprint) {
     pix[i  ] = rgb.r // red
     pix[i+1] = rgb.g // green
     pix[i+2] = rgb.b // blue
-    pix[i+3] = Math.floor(settings.network_shape_contour_alpha * pix[i+3]) // alpha
+    pix[i+3] = Math.floor(settings.network_shape_contour_opacity * pix[i+3]) // alpha
   }
 
   report("...done.")
@@ -780,7 +780,7 @@ function drawEdgesLayer(ctx, voronoiData, edges, highlighted) {
   options.display_edges = true // disable for monitoring purpose
   options.max_edge_count = Infinity // for monitoring only
   options.edge_thickness = settings.edge_thickness*Math.min(settings.width, settings.height) / 1000
-  options.edge_alpha = highlighted ? settings.edge_highlighted_alpha : settings.edge_muted_alpha
+  options.edge_alpha = highlighted ? settings.edge_highlighted_opacity : settings.edge_muted_opacity
   options.edge_color = "#FFF"
   options.node_halo = settings.edge_high_quality
 
