@@ -3,7 +3,7 @@
 }
 
 .command-zone {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Oswald', sans-serif;
   overflow-y: auto;
 }
 
@@ -16,23 +16,36 @@
   overflow-x: hidden;
 }
 
+.content p {
+  margin: 6px 0px;
+}
+.content h1, .content h2, .content h3 {
+  margin-bottom: 3px;
+}
+
 .fancy-text {
-  font-family: 'Raleway', sans-serif;
-  font-size: 1.2em;
-  color: #534b45;
-  background-color: #EDE9E2;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.4em;
+  font-weight: 300;
+  color: #f9faff;
+  background-color: #858dfe;
+}
+
+.fancy-text h1, .fancy-text h2, .fancy-text h3 {
+  font-weight: 200;
+  font-size: 1.6em;
 }
 
 .fancy-text .main-title {
-  font-family: 'Lobster', cursive;
-  font-weight: 400;
+  font-family: 'Oswald', serif;
+  font-weight: 200;
   font-size: 2.6em;
   margin-top: 0;
   margin-bottom: 12px;
 }
 
 h1 .subtitle {
-  font-family: 'Raleway', cursive;
+  font-family: 'Oswald', cursive;
   font-weight: 300;
   font-size: 0.6em;
   display: block;
@@ -46,11 +59,11 @@ a {
 }
 
 a:link,
-a:visited { color: #53aaea; }
-a:hover   { color: #7FDBFF; }
+a:visited { color: #ccd; }
+a:hover   { color: #fff; }
 a:active  {
   transition: color .3s;
-  color: #007BE6;
+  color: #fff;
 }
 
 /* Menu items */
@@ -61,10 +74,10 @@ a:active  {
   cursor: pointer;
 }
 .menu-item:hover {
-  background-color: #dbedf0;
+  background-color: #3c44ca;
 }
 .menu-item h3 {
-  font-family: 'Lobster', cursive;
+  font-family: 'Oswald', cursive;
   font-weight: 400;
   font-size: 1.4em;
   margin: 0;
@@ -74,7 +87,7 @@ a:active  {
 }
 
 h3.script-title {
-  font-family: 'Lobster', cursive;
+  font-family: 'Oswald', cursive;
   font-weight: 400;
   font-size: 1.4em;
   margin: 0;
@@ -83,7 +96,7 @@ h3.script-title {
 
 /* Uploader */
 .upload-background {
-  background-color: #7595af;
+  background-color: #bdc2ff;
 }
 .upload-area-container{
   user-select: none;
@@ -102,7 +115,7 @@ h3.script-title {
           transition: background-color .2s;
 }
 .upload-area-container:hover .upload-area, .upload-area-container.over .upload-area{
-  background-color: #53aaea;
+  background-color: #3c44ca;
 }
 .upload-area-container.loading .upload-area{
   background-color: #46b8da;
@@ -114,7 +127,7 @@ h3.script-title {
   background-color: #FF0000;
 }
 .upload-text-main{
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 28px;
 }
 .upload-area-container:hover   .upload-text-main,
@@ -125,7 +138,7 @@ h3.script-title {
   color: #FFF;
 }
 .upload-text-sub{
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Oswald', sans-serif;
   color: #AAA;
   font-size: 16px;
 }

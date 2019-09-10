@@ -1,6 +1,6 @@
 <div layout="row" layout-fill>
   <div layout="column" id="sidecol">
-    <div lcd  style="width:300px; height:370px; overflow:hidden;" anim-status="'off'"></div>
+    <div lcd style="width:300px; height:370px; overflow:hidden;" anim-status="'off'"></div>
     <div layout="column" layout-padding flex class="upload-background">
       <div
         class="upload-area-container"
@@ -26,14 +26,27 @@
     <input id="hidden-file-input" type="file" name="hidden-file-input" style="display: none;" onchange="angular.element(this).scope().setFile(this)"/>
   </div>
   
-  <div layout="column" layout-padding flex class="fancy-text content">
+  <div layout="column" flex class="fancy-text content" style="padding: 12px">
     <h1 class="main-title">
-      Graph Recipes - Backscatter edition
-      <br>
-      <span class="subtitle">...based on <a href="https://graphology.github.io/">Graphology</a></span>
+      Backscatter Network Scripts
     </h1>
     <p>
-      Reference network: <a href ng-click="loadExample('backscatter-test.gexf')">Backscatter-test</a>
+      This tool helps you visualize network graphs in different ways.
+    </p>
+    <h3>How to use</h3>
+    <p>
+      Load your network into the tool in the lower-left corner or try the <a href ng-click="loadExample('backscatter-test.gexf')">reference network</a>. Then pick and edit a script and enjoy the outcome: a processed network, image, or anything Javascript can produce.
+    </p>
+    <p>
+      Note: some scripts require editing their settings so that they work with your own network. See documentation.
+    </p>
+    <h3>Reference network</h3>
+    <p>
+      <a href ng-click="loadExample('backscatter-test.gexf')" style="background-color: #3c44ca; color:#90ff00">[TRY ME!]</a> All the scripts work with me unedited.
+    </p>
+    <h3>How to edit scripts</h3>
+    <p>
+      You can edit them in the interface or simply copy-paste them from a text editor. The language is Javascript. The graph library used is <a href="https://graphology.github.io/">Graphology</a>.
     </p>
   </div>
 </div>
