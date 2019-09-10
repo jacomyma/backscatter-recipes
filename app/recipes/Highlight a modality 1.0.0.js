@@ -1012,7 +1012,7 @@ function drawNodeLabelsLayer(ctx, nodesBySize_) {
   options.default_color_label = settings.label_color
   options.sized_labels = true
   options.label_spacing_factor = 1.5 // 1=normal; 2=box twice as wide/high etc.
-  options.font_family = 'IBM Plex Sans Condensed, sans-serif'
+  options.font_family = 'Oswald, sans-serif'
   options.font_min_size = settings.label_font_min_size * Math.min(settings.width, settings.height)/1000
   options.font_max_size = settings.label_font_max_size * Math.min(settings.width, settings.height)/1000
   options.font_thickness_optical_correction = 0.7
@@ -1022,16 +1022,15 @@ function drawNodeLabelsLayer(ctx, nodesBySize_) {
   var i, x, y
 
   // Deal with font weights
-  //  Relative thicknesses for: IBM Plex Sans Condensed
-  //  Thin/100: 3.5
-  //  Extra-Light/200: 6
-  //  Light/300: 9
-  //  Regular/400: 12.5
-  //  Medium/500: 17.5
-  //  Semi-bold/600: 20
-  //  Bold/700: 23.5
-  var weights =     [ /*100, 200, 300,*/  400,  500, 600,  700 ]
-  var thicknesses = [ /*3.5,   6,   9,*/ 12.5, 17.5,  20, 23.5 ]
+  //  Relative thicknesses for: Oswald
+  //  Extra-Light/200: 4.5
+  //  Light/300: 6.5
+  //  Regular/400: 9.5
+  //  Medium/500: 12.5
+  //  Semi-bold/600: 13.5
+  //  Bold/700: 14.5
+  var weights =     [ /*200,*/ 300, 400,  500,  600,  700 ]
+  var thicknesses = [ /*4.5,*/ 6.5, 9.5, 12.5, 13.5, 14.5 ]
   var thicknessToWeight = d3.scaleLinear()
     .domain(thicknesses)
     .range(weights)

@@ -1385,7 +1385,7 @@ function drawNodeLabelsLayer(ctx, nodesBySize_) {
   options.label_count = Infinity
   options.label_color = settings.node_highlight_color
   options.label_spacing_factor = 1.5 // 1=normal; 2=box twice as wide/high etc.
-  options.font_family = 'IBM Plex Sans Condensed, sans-serif'
+  options.font_family = 'Oswald, sans-serif'
   options.font_size = settings.label_font_size * Math.min(settings.width, settings.height)/1000
   options.font_weight = settings.label_font_weight
   options.border_thickness = settings.label_border_thickness * Math.min(settings.width, settings.height)/1000
@@ -1523,7 +1523,7 @@ function drawClusterLabelsLayer(ctx, modalities, centroidsByModality) {
   options.draw_label = true // idem
   options.font_size = settings.cluster_label_font_size * Math.min(settings.width, settings.height) / 1000
   options.font_weight = 300
-  options.font_family = "'IBM Plex Sans Condensed', sans-serif"
+  options.font_family = "'Oswald', sans-serif"
   options.border_thickness = 2*settings.cluster_label_outline_thickness * Math.min(settings.width, settings.height) / 1000
   options.border_color = function(c){return c.toString()}
   options.label_color = function(c){return "#FFF"}
