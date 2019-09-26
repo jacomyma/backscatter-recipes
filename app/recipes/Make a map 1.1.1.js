@@ -95,6 +95,7 @@ settings.edge_show_part = 1 // Range from 0 to 1 // 0 hides all edges, 1 shows a
 
 // Layer: Nodes
 settings.node_size = 1 // Factor to adjust the nodes drawing size
+settings.node_border_thickness = 0
 
 // Layer: Node labels
 settings.label_limit = Infinity // Limit the count of labels. Infinity is a valid number.
@@ -1270,8 +1271,8 @@ function drawNodesLayer(ctx, nodesBySize) {
   log("Draw nodes...")
 
   var options = {}
-  options.node_stroke = true
-  options.node_stroke_width = 0.5 * Math.min(settings.width, settings.height)/1000
+  options.node_stroke = settings.node_border_thickness > 0
+  options.node_stroke_width = settings.node_border_thickness * Math.min(settings.width, settings.height)/1000
 
   // Clear canvas
   ctx.clearRect(0, 0, settings.width, settings.height)

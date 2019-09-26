@@ -14,17 +14,17 @@ angular.module('graphrecipes.recipes_list', [])
 	{
 		'name': 'Make a Map',
 		'desc': 'Simple rendering of nodes and edges (1 megapixel).',
-		'file': 'Make a map 1.1.0.js'
+		'file': 'Make a map 1.1.1.js'
 	},
 	{
 		'name': 'Make a Map (settings: clusters)',
 		'desc': 'Rendering of nodes and clusters (1 megapixels)',
-		'file': 'Make a map 1.1.0 - Clusters.js'
+		'file': 'Make a map 1.1.1 - Clusters.js'
 	},
 	{
 		'name': 'Make a Map (settings: high resolution)',
 		'desc': 'Produces a high quality, 64 megapixel rendering of nodes and edges.',
-		'file': 'Make a map 1.1.0 - HR.js'
+		'file': 'Make a map 1.1.1 - HR.js'
 	},
 	{
 		'name': 'Legend',
@@ -34,7 +34,7 @@ angular.module('graphrecipes.recipes_list', [])
 	{
 		'name': 'Highlight Modality',
 		'desc': 'Highlights one or more modalities, and mutes or hides the rest.',
-		'file': 'Highlight a modality 1.1.0.js'
+		'file': 'Highlight a modality 1.1.1.js'
 	},
 	{
 		'name': 'Orientation Mini-map',
@@ -49,6 +49,6 @@ angular.module('graphrecipes.recipes_list', [])
 	{
 		'name': 'Highlight Nodes',
 		'desc': 'Highlights a list of nodes with thick black lines.',
-		'file': 'Highlight nodes 1.1.0.js'
+		'file': 'Highlight nodes 1.1.1.js'
 	}
 ])

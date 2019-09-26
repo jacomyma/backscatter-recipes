@@ -22,8 +22,8 @@ var settings = {}
 settings.save_at_the_end = false
 
 // Image size and resolution
-settings.width =  8000 // in pixels
-settings.height = 8000 // in pixels
+settings.width =  1000 // in pixels
+settings.height = 1000 // in pixels
 
 // Zoom:
 // You can zoon on a given point of the network
@@ -40,12 +40,12 @@ settings.zoom_point = {x:0.5, y:0.5} // range from 0 to 1
 settings.draw_background = true
 settings.draw_network_shape_fill = true
 settings.draw_network_shape_contour = false
-settings.draw_cluster_fills = false
+settings.draw_cluster_fills = true
 settings.draw_cluster_contours = false
-settings.draw_cluster_labels = false
-settings.draw_edges = true
+settings.draw_cluster_labels = true
+settings.draw_edges = false
 settings.draw_nodes = true
-settings.draw_node_labels = true
+settings.draw_node_labels = false
 
 // Layer order variations:
 settings.cluster_fill_above_nodes = false
@@ -71,7 +71,7 @@ settings.network_shape_contour_color = "#cdc7c3"
 //        (a potato per modality of tqrget attribute)
 // ...generic structure
 settings.cluster_all_modalities = false // By default, we only use modalities specified in "node_clusters"
-settings.cluster_spreading = 0.5 // Range: 0.01 to 0.99 // Balanced: 0.5 // Acts on size
+settings.cluster_spreading = 0.2 // Range: 0.01 to 0.99 // Balanced: 0.5 // Acts on size
 settings.cluster_smoothness = 5 // Range: 0 to 10 or more // Makes rounder clusters
 // ...cluster fills
 settings.cluster_fill_opacity = 1.0 // Opacity // Range from 0 to 1
@@ -90,16 +90,17 @@ settings.cluster_label_outline_thickness = 4 // in px based on 1MP 72dpi
 // Layer: Edges
 settings.edge_thickness = 0.3 // in px based on 1MP
 settings.edge_opacity = 0.5 // Opacity // Range from 0 to 1
-settings.edge_high_quality = true // Halo around nodes // Time-consuming
+settings.edge_high_quality = false // Halo around nodes // Time-consuming
 settings.edge_show_part = 1 // Range from 0 to 1 // 0 hides all edges, 1 shows all
 
 // Layer: Nodes
-settings.node_size = 0.8 // Factor to adjust the nodes drawing size
+settings.node_size = 1 // Factor to adjust the nodes drawing size
+settings.node_border_thickness = 0
 
 // Layer: Node labels
 settings.label_limit = Infinity // Limit the count of labels. Infinity is a valid number.
-settings.label_font_min_size = 4 // in pt based on 1MP 72dpi
-settings.label_font_max_size = 18  // in pt based on 1MP 72dpi
+settings.label_font_min_size = 16 // in pt based on 1MP 72dpi
+settings.label_font_max_size = 32  // in pt based on 1MP 72dpi
 settings.label_border_thickness = 0
 settings.label_color = "#000"
 
@@ -167,7 +168,7 @@ settings.node_clusters = {
 
 // Advanced settings
 settings.adjust_voronoi_range = 25 // Factor // Larger node halo + slightly bigger clusters
-settings.max_voronoi_size = 1000 // Above that size, we approximate the voronoi
+settings.max_voronoi_size = 250 // Above that size, we approximate the voronoi
 
 /// (END OF SETTINGS)
 
@@ -1270,8 +1271,8 @@ function drawNodesLayer(ctx, nodesBySize) {
   log("Draw nodes...")
 
   var options = {}
-  options.node_stroke = true
-  options.node_stroke_width = 0.5 * Math.min(settings.width, settings.height)/1000
+  options.node_stroke = settings.node_border_thickness > 0
+  options.node_stroke_width = settings.node_border_thickness * Math.min(settings.width, settings.height)/1000
 
   // Clear canvas
   ctx.clearRect(0, 0, settings.width, settings.height)
