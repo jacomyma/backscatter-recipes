@@ -1180,7 +1180,7 @@ function drawNodeLabelsLayer(ctx, nodesBySize_) {
           : Math.floor(0.6 * options.font_min_size + 0.4 * options.font_max_size)
 
         var sw = normalizeFontSize(fontSize)
-        fontSize = sw[0]
+        // fontSize = sw[0]
         var fontWeight = sw[1]
 
         // Then, draw the label only if wanted
