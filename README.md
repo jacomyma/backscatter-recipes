@@ -1,6 +1,6 @@
-# Graph Recipes
+# Backscatter Recipes
 
-A vaiation of Graph Recipes with specific recipes.
+A variation of Graph Recipes with specific recipes. Developed by *Sofie Thorsen* and *Mathieu Jacomy* for the Copenhagen-based analysis studio **Backscatter**.
 
 ## Install
 
